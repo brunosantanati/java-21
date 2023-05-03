@@ -1,7 +1,7 @@
 package me.brunosantana.sequenced.collection;
 
-import java.util.LinkedHashSet;
-import java.util.SequencedSet;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /*
 Spotify - Inside Java - Podcast Episode "Sequenced Collections" with Stuart Marks
@@ -24,10 +24,12 @@ public class ExampleSequencedCollection {
 
     public static void main(String[] args) {
         testSequencedSet();
+        testList();
+        testCollectionsUtility();
     }
 
     private static void testSequencedSet() {
-        System.out.println("-------- SequencedSet --------\n");
+        System.out.println("\n-------- SequencedSet --------\n");
         printWithTab("######## Adding items ########");
 
         SequencedSet<String> sequencedSet = new LinkedHashSet<>();
@@ -63,6 +65,48 @@ public class ExampleSequencedCollection {
         printWithTab(reversed);
     }
 
+    private static void testList(){
+        System.out.println("\n-------- List --------\n");
+
+        printWithTab("######## Adding items ########");
+        List<String> list = new ArrayList<>(List.of("B", "C"));
+        list.addFirst("A");
+        list.addLast("D");
+
+        printWithTab(list);
+
+        printWithTab("######## Reverse order ########");
+        printWithTab(list.reversed());
+    }
+
+    private static void testCollectionsUtility() {
+        System.out.println("\n-------- Collections Utility new methods --------\n");
+
+        printWithTab("######## Unmodifiable Set ########");
+
+        SequencedSet<String> sequencedSet = new LinkedHashSet<>(Set.of("B", "C"));
+        sequencedSet.addFirst("A");
+        printWithTab(sequencedSet);
+
+        Set<String> unmodifiableSet = Collections.unmodifiableSet(sequencedSet);
+        try {
+            unmodifiableSet.add("D");
+        } catch (UnsupportedOperationException e) {
+            printWithTab("unmodifiableSet is really unmodifiable");
+        }
+        printWithTab(unmodifiableSet);
+
+        System.out.println();
+        printWithTab("######## Unmodifiable Map ########");
+
+        SequencedMap<String, String> sequencedMap = new LinkedHashMap<>();
+        sequencedMap.putAll(Map.of("B", "Bruno", "C", "Carlos"));
+
+        Collections.unmodifiableMap(sequencedMap);
+        printWithTab(sequencedMap);
+
+        //Collections.unmodifiableSequencedCollection(sequencedCollection) //check this method later
+    }
     private static void printWithTab(Object obj) {
     	System.out.println("\t" + obj);
     }
