@@ -1,7 +1,6 @@
 package me.brunosantana.sequenced.collection;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /*
 Spotify - Inside Java - Podcast Episode "Sequenced Collections" with Stuart Marks
@@ -28,7 +27,7 @@ public class ExampleSequencedCollection {
     public static void main(String[] args) {
         testSequencedSet();
         testList();
-        testMap();
+        testSequencedMap();
         testCollectionsUtility();
     }
 
@@ -83,7 +82,7 @@ public class ExampleSequencedCollection {
         printWithTab(list.reversed());
     }
 
-    private static void testMap() {
+    private static void testSequencedMap() {
         System.out.println("\n-------- SequencedMap --------\n");
 
         printWithTab("######## Adding items ########");
